@@ -1,96 +1,16 @@
-# Obsidian Sample Plugin
+# Obsidian Plugin - Taskmgr
 
-This is a sample plugin for Obsidian (https://obsidian.md).
+这是一个帮你把多行文本生成Markdown任务列表的工具。
+目前只是一个最早测试版本，不建议任何人使用。
 
-This project uses Typescript to provide type checking and documentation.
-The repo depends on the latest plugin API (obsidian.d.ts) in Typescript Definition format, which contains TSDoc comments describing what it does.
+This is a tool that helps you generate a Markdown task list from multi-line text.
+It is currently only an early testing version and is not recommended for anyone to use.
 
-**Note:** The Obsidian API is still in early alpha and is subject to change at any time!
+### 背景 Background
+Markdown要生成任务列表其实很简单了。  
+但是我给大家讲个故事，是这样的。有一个周末，我在obsidian中填写我老婆下一周的菜单，因为我老婆正在怀孕，所以每周的菜单都是我提前计划的营养餐。当把菜单填完的时候，我总是用dataviewjs汇总下一周菜单，方便我每天查看，并且我需要根据这个菜单在网上购买所需要材料。可是在我买完材料后，总会发现又漏买了一些材料。因为一周这么多菜，太容易出错了，而且我没有checklist可以查看，这样会花费我很多的时间。于是我决定写个程序，根据已经定好的菜单，自动生成我需要采购的做菜材料。
+至于为什么需要一个插件，而不是直接把购买的材料展现在页面上，这是熟知obsidian的人都知道的，数据总是会重新加载，我的任务列表失去了完成状态，所以我不得不开发一个插件，才有写文档的权限，这样方便把统计出来的采购任务放到一个文件中，每次重新统计也只会更新这个任务列表，同时保留它的完成状态，而不是全部任务都变成了未完成。
 
-This sample plugin demonstrates some of the basic functionality the plugin API can do.
-- Adds a ribbon icon, which shows a Notice when clicked.
-- Adds a command "Open Sample Modal" which opens a Modal.
-- Adds a plugin setting tab to the settings page.
-- Registers a global click event and output 'click' to the console.
-- Registers a global interval which logs 'setInterval' to the console.
-
-## First time developing plugins?
-
-Quick starting guide for new plugin devs:
-
-- Check if [someone already developed a plugin for what you want](https://obsidian.md/plugins)! There might be an existing plugin similar enough that you can partner up with.
-- Make a copy of this repo as a template with the "Use this template" button (login to GitHub if you don't see it).
-- Clone your repo to a local development folder. For convenience, you can place this folder in your `.obsidian/plugins/your-plugin-name` folder.
-- Install NodeJS, then run `npm i` in the command line under your repo folder.
-- Run `npm run dev` to compile your plugin from `main.ts` to `main.js`.
-- Make changes to `main.ts` (or create new `.ts` files). Those changes should be automatically compiled into `main.js`.
-- Reload Obsidian to load the new version of your plugin.
-- Enable plugin in settings window.
-- For updates to the Obsidian API run `npm update` in the command line under your repo folder.
-
-## Releasing new releases
-
-- Update your `manifest.json` with your new version number, such as `1.0.1`, and the minimum Obsidian version required for your latest release.
-- Update your `versions.json` file with `"new-plugin-version": "minimum-obsidian-version"` so older versions of Obsidian can download an older version of your plugin that's compatible.
-- Create new GitHub release using your new version number as the "Tag version". Use the exact version number, don't include a prefix `v`. See here for an example: https://github.com/obsidianmd/obsidian-sample-plugin/releases
-- Upload the files `manifest.json`, `main.js`, `styles.css` as binary attachments. Note: The manifest.json file must be in two places, first the root path of your repository and also in the release.
-- Publish the release.
-
-> You can simplify the version bump process by running `npm version patch`, `npm version minor` or `npm version major` after updating `minAppVersion` manually in `manifest.json`.
-> The command will bump version in `manifest.json` and `package.json`, and add the entry for the new version to `versions.json`
-
-## Adding your plugin to the community plugin list
-
-- Check https://github.com/obsidianmd/obsidian-releases/blob/master/plugin-review.md
-- Publish an initial version.
-- Make sure you have a `README.md` file in the root of your repo.
-- Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
-
-## How to use
-
-- Clone this repo.
-- Make sure your NodeJS is at least v16 (`node --version`).
-- `npm i` or `yarn` to install dependencies.
-- `npm run dev` to start compilation in watch mode.
-
-## Manually installing the plugin
-
-- Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
-
-## Improve code quality with eslint (optional)
-- [ESLint](https://eslint.org/) is a tool that analyzes your code to quickly find problems. You can run ESLint against your plugin to find common bugs and ways to improve your code. 
-- To use eslint with this project, make sure to install eslint from terminal:
-  - `npm install -g eslint`
-- To use eslint to analyze this project use this command:
-  - `eslint main.ts`
-  - eslint will then create a report with suggestions for code improvement by file and line number.
-- If your source code is in a folder, such as `src`, you can use eslint with this command to analyze all files in that folder:
-  - `eslint .\src\`
-
-## Funding URL
-
-You can include funding URLs where people who use your plugin can financially support it.
-
-The simple way is to set the `fundingUrl` field to your link in your `manifest.json` file:
-
-```json
-{
-    "fundingUrl": "https://buymeacoffee.com"
-}
-```
-
-If you have multiple URLs, you can also do:
-
-```json
-{
-    "fundingUrl": {
-        "Buy Me a Coffee": "https://buymeacoffee.com",
-        "GitHub Sponsor": "https://github.com/sponsors",
-        "Patreon": "https://www.patreon.com/"
-    }
-}
-```
-
-## API Documentation
-
-See https://github.com/obsidianmd/obsidian-api
+It is actually very simple to generate a task list in Markdown.
+But let me tell you a story, it goes like this. One weekend, I filled out my wife's menu for the next week in obsidian. Because my wife is pregnant, the weekly menu is all nutritious meals that I plan in advance. When I finish filling out the menu, I always use dataviewjs to summarize the menu for the next week, which is convenient for me to check every day, and I need to purchase the required materials online based on this menu. But after I buy the materials, I always find that I missed buying some more materials. Because there are so many dishes a week, it’s too easy to make mistakes, and I don’t have a checklist to check, which will take a lot of time. So I decided to write a program to automatically generate the cooking ingredients I need to purchase based on the menu I have set.
+As for why a plug-in is needed instead of directly displaying purchased materials on the page, this is known to anyone familiar with obsidian. The data will always be reloaded and my task list lost its completion status, so I had to develop a Only the plug-in has the permission to write documents, so that it is convenient to put the counted procurement tasks into a file. Each time the statistics is re-calculated, only this task list will be updated, while its completion status will be retained, instead of all tasks becoming undone.

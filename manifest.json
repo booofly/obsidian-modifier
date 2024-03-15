@@ -1,6 +1,6 @@
 {
-	"id": "obsidian-modifier",
-	"name": "Modifier",
+	"id": "obsidian-taskmgr",
+	"name": "Taskmgr",
 	"version": "0.0.1",
 	"minAppVersion": "0.15.0",
 	"description": "",
